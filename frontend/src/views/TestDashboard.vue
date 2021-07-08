@@ -208,6 +208,7 @@
 
 <script>
 import { mapState, mapGetters } from 'vuex'
+import * as Bokeh from '@bokeh/bokehjs'
 
 export default {
   name: 'TestDashboard',
@@ -223,6 +224,11 @@ export default {
   },
   created() {
     this.$store.dispatch('fetchExperience')
+  },
+  mounted() {
+    fetch('plot/creep.json')
+      .then(response => response.json())
+      .then(item => Bokeh.embed.embed_item(item, 'plot-creep'))
   },
 }
 </script>

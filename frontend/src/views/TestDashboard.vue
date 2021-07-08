@@ -144,6 +144,10 @@
     <div id="graphs" class="p-grid">
       <div class="p-col-10">
         <div class="p-grid">
+          <Chart class="p-col-6" type="line" :data="stressStrainData" />
+          <Chart class="p-col-6" type="line" :data="creepData" />
+          <Chart class="p-col-6" type="line" :data="hystareaData" />
+          <Chart class="p-col-6" type="line" :data="stiffnessData" />
           <iframe class="p-col-6" id="plot_stress_strain" src="/plot_select_stress_strain.html" frameborder="0"/>
           <iframe class="p-col-6" id="plot_creep" src="/plot_creep.html" frameborder="0"/>
           <iframe class="p-col-6" id="plot_hystarea" src="/plot_hystarea.html" frameborder="0"/>
@@ -193,6 +197,7 @@ import { mapState, mapGetters } from 'vuex'
 import Skeleton from 'primevue/skeleton';
 import Panel from 'primevue/panel'
 import Divider from 'primevue/divider'
+import Chart from 'primevue/chart';
 
 export default {
   name: 'TestDashboard',
@@ -200,6 +205,7 @@ export default {
     Panel,
     Divider,
     Skeleton,
+    Chart,
   },
   computed: {
     ...mapState([
@@ -213,7 +219,28 @@ export default {
   },
   created() {
     this.$store.dispatch('fetchExperience')
+
+    fetch('chart/stress_strain.json')
+      .then(response => response.json())
+      .then(data => this.stressStrainData = data)
+    fetch('chart/creep.json')
+      .then(response => response.json())
+      .then(data => this.creepData = data)
+    fetch('chart/hystarea.json')
+      .then(response => response.json())
+      .then(data => this.hystareaData = data)
+    fetch('chart/stiffness.json')
+      .then(response => response.json())
+      .then(data => this.stiffnessData = data)
   },
+  data() {
+    return {
+      stressStrainData: {},
+      creepData: {},
+      hystareaData: {},
+      stiffnessData: {},
+    }
+  }
 }
 </script>
 

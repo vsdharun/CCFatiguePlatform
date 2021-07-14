@@ -154,7 +154,8 @@
                 <iframe id="plot_stress_strain" src="/plot_select_stress_strain.html" frameborder="0"/>
               </v-col>
               <v-col>
-                <iframe id="plot_creep" src="/plot_creep.html" frameborder="0"/>
+                <div id="plot-creep"></div>
+                <!-- <iframe id="plot_creep" src="/plot_creep.html" frameborder="0"/> -->
               </v-col>
             </v-row>
             <v-row no-gutters>
@@ -208,7 +209,7 @@
 
 <script>
 import { mapState, mapGetters } from 'vuex'
-import * as Bokeh from '@bokeh/bokehjs'
+import { embed } from 'bokeh'
 
 export default {
   name: 'TestDashboard',
@@ -228,7 +229,7 @@ export default {
   mounted() {
     fetch('plot/creep.json')
       .then(response => response.json())
-      .then(item => Bokeh.embed.embed_item(item, 'plot-creep'))
+      .then(item => embed.embed_item(item, 'plot-creep'))
   },
 }
 </script>

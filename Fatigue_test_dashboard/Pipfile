@@ -5,7 +5,7 @@ name = "pypi"
 
 [packages]
 pandas = "*"
-bokeh = "*"
+bokeh = "==2.3.3"
 
 [dev-packages]
 

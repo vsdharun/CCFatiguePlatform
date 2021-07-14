@@ -136,14 +136,14 @@ def create_sub_hystloops(df, sub_index):
 
 
 def save_figure(p, name: str, output_dir="output"):
-    json_data = json.dumps(json_item(p, name))
+    json_data = json.dumps(json_item(p))
     os.makedirs(output_dir, exist_ok=True)
     with open(os.path.join(output_dir, name + ".json"), "w") as f:
         f.write(json_data)
 
 
 def plot_select_stress_strain(sub_hystloops):
-    stressStrain = figure(title='Stress - Strain', plot_width=1200, plot_height=800,
+    stressStrain = figure(title='Stress - Strain', sizing_mode="stretch_both",
                           x_axis_label="Strain", y_axis_label="Stress")
 
     stressStrain.add_tools(HoverTool(tooltips=[("Stress", "@stress"), ("Strain", "@strain"),
@@ -154,7 +154,7 @@ def plot_select_stress_strain(sub_hystloops):
     # for curve in sub_hystloops2:
     #    stressStrain.line(x = 'strain', y = 'stress', source = ColumnDataSource(data = curve), line_color = 'red')
 
-    show(stressStrain)
+    # show(stressStrain)
     save_figure(stressStrain, "stress_strain")
 
 
@@ -167,13 +167,13 @@ def plot_total_stress_strain(df):
 
     total_stress_strain = {'strain': total_strain,
                            'stress': total_stress}
-    stress_strain = figure(title='Stress - Strain', plot_width=1200, plot_height=800,
+    stress_strain = figure(title='Stress - Strain',
                            x_axis_label="Strain", y_axis_label="Stress")
     stress_strain.add_tools(
         HoverTool(tooltips=[("Stress", "@stress"), ("Strain", "@strain")]))
     stress_strain.line(x='strain', y='stress',
                        source=ColumnDataSource(data=total_stress_strain))
-    show(stress_strain)
+    # show(stress_strain)
     save_figure(stress_strain, "stress_strain")
 
 
@@ -181,10 +181,10 @@ def plot_total_stress_strain(df):
 
 
 def plot_Load_curve(df):
-    loadCurve = figure(title='Load curve', plot_width=1200, plot_height=800,
+    loadCurve = figure(title='Load curve',
                        x_axis_label="Number of cycles", y_axis_label="Stress")
     loadCurve.line(df.Machine_N_cycles, df.Machine_Load)
-    show(loadCurve)
+    # show(loadCurve)
     save_figure(loadCurve, "loadCurve")
 
 
@@ -192,11 +192,11 @@ def plot_Load_curve(df):
 
 
 def plot_Strain_envelope(df):
-    strainEnvelope = figure(title='Strain envelope', plot_width=1200, plot_height=800,
+    strainEnvelope = figure(title='Strain envelope',
                             x_axis_label="Number of cycles", y_axis_label="Strain")
     strainEnvelope.line(df.Machine_N_cycles, df.Machine_Displacement)
     #strainEnvelope.line(df2.Machine_N_cycles, df2.Machine_Displacement, line_color = 'red')
-    show(strainEnvelope)
+    # show(strainEnvelope)
     save_figure(strainEnvelope, "strainEnvelope")
 
 
@@ -214,14 +214,14 @@ sub_creep = {'n_cycles': creep_n_cycles,
 
 
 def plot_creep(hyst_df):
-    creep = figure(title='Creep evolution', plot_width=1200, plot_height=800,
+    creep = figure(title='Creep evolution', sizing_mode="stretch_both",
                    x_axis_label="N_cycles", y_axis_label="Creep")
     creep.add_tools(
         HoverTool(tooltips=[("Creep", "@creep"), ("Nb. cycles", "@n_cycles")]))
     creep.line(x='n_cycles', y='creep',
                source=ColumnDataSource(data=sub_creep))
     #creep.line(x = 'n_cycles', y = 'creep', source = ColumnDataSource(data = sub_creep2), line_color = 'red')
-    show(creep)
+    # show(creep)
     save_figure(creep, "creep")
 
 
@@ -247,14 +247,14 @@ def calculate_tde(hyst_area):
 
 def plot_hystarea(hyst_df):
 
-    area = figure(title='Hysteresis loop area evolution', plot_width=1200, plot_height=800,
+    area = figure(title='Hysteresis loop area evolution', sizing_mode="stretch_both",
                   x_axis_label="N_cycles", y_axis_label="Hysteresis area")
     area.add_tools(
         HoverTool(tooltips=[("area", "@area"), ("Nb. cycles", "@n_cycles")]))
     area.line(x='n_cycles', y='area', source=ColumnDataSource(data=sub_hyst))
     #area.line(x = 'n_cycles', y = 'area', source = ColumnDataSource(data = sub_hyst2), line_color = 'red')
 
-    show(area)
+    # show(area)
     save_figure(area, "hystarea")
 
 
@@ -274,7 +274,7 @@ def plot_stiffness(hyst_df):
     # sub_hyst2 = {'n_cycles': hyst_n_cycles2,
     #             'stiffness': hyst_stiff2}
 
-    stiff = figure(title='Stiffness evolution under cyclic loading', plot_width=1200, plot_height=800,
+    stiff = figure(title='Stiffness evolution under cyclic loading', sizing_mode="stretch_both",
                    x_axis_label="N_cycles", y_axis_label="Stiffness")
     stiff.add_tools(
         HoverTool(tooltips=[("stiffness", "@stiffness"), ("Nb. cycles", "@n_cycles")]))
@@ -282,7 +282,7 @@ def plot_stiffness(hyst_df):
                source=ColumnDataSource(data=sub_hyst))
     #stiff.line(x = 'n_cycles', y = 'stiffness', source = ColumnDataSource(data = sub_hyst2), line_color = 'red')
 
-    show(stiff)
+    # show(stiff)
     save_figure(stiff, "stiffness")
 
 

@@ -41,7 +41,7 @@ with:
 | eyy              | Strain measured along secondary axis         | [-]  | double    |   |
 | exy              | Strain measured along a specified axis       | [-]  | double    |   |
 | crack_length     | Crack length measurement (for fracture testings)   | [mm]  | double    |   |
-| Th_time              | Time as counted by temperature monitoring          | [sec] | int       |   |
+| Th_time              | Time as counted by temperature monitoring          | [sec] | double       |   |
 | Th\_N_cycles          | Number of cycles counted by temperature monitoring | [-]   | int       |   |
 | Th\_specimen_max      | Maximum temperature monitored                      | [°C]  | single    |   |
 | Th\_specimen_mean     | Mean temperature                                   | [°C]  | single    |   |
